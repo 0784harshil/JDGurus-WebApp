@@ -1,0 +1,57 @@
+/* navbar.css */
+
+/* AppBar background color */
+.AppBar {
+    background-color: #333; /* Dark grey background */
+    box-shadow: 0 4px 8px rgba(200, 17, 17, 0.5); /* Subtle shadow for depth */
+}
+
+/* Toolbar styling */
+.AppBar .Toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navbar title styling */
+.AppBar .Navbar-title {
+    flex-grow: 1;
+    font-family: 'Playfair Display', serif; /* Classy font for title */
+    font-weight: bold;
+    color: white; /* Title color */
+    font-size: 1.5rem; /* Larger font size for emphasis */
+}
+
+/* Button styling */
+.AppBar .Navbar-button {
+    font-family: 'Roboto', sans-serif; /* Classy font for buttons */
+    color: white; /* Button text color */
+    margin-left: 10px; /* Space between buttons */
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: transparent; /* Transparent background */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+}
+
+/* Button hover effect */
+.AppBar .Navbar-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light grey hover effect */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Active button styling */
+.AppBar .Navbar-button:active {
+    background-color: rgba(255, 255, 255, 0.3); /* Darker hover effect when active */
+    transform: scale(0.95); /* Slightly shrink button when active */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .AppBar .Navbar-title {
+        font-size: 1.2rem; /* Smaller title on mobile */
+    }
+    .AppBar .Navbar-button {
+        margin-left: 5px; /* Reduce space between buttons on mobile */
+    }
+}
