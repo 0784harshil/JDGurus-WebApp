@@ -10,6 +10,11 @@ server = 'HARSHIL\\PCAMERICA'  # Your server name
 database = 'cresql'  # Your database name
 connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
 
+# Database connection configuration
+def get_db_connection():
+    conn = pyodbc.connect(connection_string)
+    return conn
+
 @app.route('/api/kit_details', methods=['GET'])
 def get_kit_details():
     try:
@@ -198,6 +203,54 @@ def get_label_data():
             return jsonify(label_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/mix-and-match', methods=['GET'])
+def mix_and_match():
+    query = """
+    SELECT 
+        ii.ItemNum AS [UPC], 
+        ii.DiffItemName AS [Item Name], 
+        it.Grand_Total AS [Unit Price], 
+        it.Total_Price AS [Sale Price], 
+        ii.Quantity AS [Item Sold], 
+        (it.Total_Price * ii.Quantity) AS [Sale Amount], 
+        ISNULL(
+            (SELECT TOP 1 i.price
+             FROM inventory i
+             JOIN kit_index k ON i.ItemNum = k.Kit_ID
+             WHERE k.ItemNum = ii.ItemNum), 0) AS [Mfg.Deal] 
+    FROM 
+        Invoice_Itemized ii 
+    JOIN 
+        Invoice_Totals it ON ii.Invoice_Number = it.Invoice_Number 
+    ORDER BY 
+        UPC
+    """
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(query)
+
+    # Fetch all results
+    rows = cursor.fetchall()
+
+    # Convert results to a list of dictionaries
+    results = []
+    for row in rows:
+        results.append({
+            'UPC': row.UPC,
+            'Item Name': row.ItemName,
+            'Unit Price': row.UnitPrice,
+            'Sale Price': row.SalePrice,
+            'Item Sold': row.ItemSold,
+            'Sale Amount': row.SaleAmount,
+            'Mfg.Deal': row.MfgDeal
+        })
+
+    cursor.close()
+    conn.close()
+
+    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)

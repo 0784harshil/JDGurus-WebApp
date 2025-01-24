@@ -11,6 +11,7 @@ import { Container } from '@mui/material';
 import LabelPrinter from './LabelPrinter'; // Import LabelPrinter component
 import Signup from './Signup'; // Import Signup component
 import EditProfile from './EditProfile'; // Import EditProfile component
+import DatabaseConnector from './DatabaseConnector'; // Import DatabaseConnector component
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/barcode-selector" element={<BarcodeSelector />} /> {/* New route for Barcode Selector */}
                     <Route path="/design1" element={<Design1 />} /> {/* New route for Design1 */}
                     <Route path="/label-printer" element={<LabelPrinter />} /> {/* New route for Label Printer */}
+                    <Route path="/database-connector" element={<DatabaseConnector />} /> {/* New route for Database Connector */}
                     {/* Add more routes as needed */}
                 </Routes>
             </Container>
