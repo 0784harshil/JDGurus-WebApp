@@ -209,16 +209,16 @@ def mix_and_match():
     query = """
     SELECT 
         ii.ItemNum AS [UPC], 
-        ii.DiffItemName AS [Item Name], 
-        it.Grand_Total AS [Unit Price], 
-        it.Total_Price AS [Sale Price], 
-        ii.Quantity AS [Item Sold], 
-        (it.Total_Price * ii.Quantity) AS [Sale Amount], 
+        ii.DiffItemName AS [ItemName], 
+        it.Grand_Total AS [UnitPrice], 
+        it.Total_Price AS [SalePrice], 
+        ii.Quantity AS [ItemSold], 
+        (it.Total_Price * ii.Quantity) AS [SaleAmount], 
         ISNULL(
             (SELECT TOP 1 i.price
              FROM inventory i
              JOIN kit_index k ON i.ItemNum = k.Kit_ID
-             WHERE k.ItemNum = ii.ItemNum), 0) AS [Mfg.Deal] 
+             WHERE k.ItemNum = ii.ItemNum), 0) AS [MfgDeal] 
     FROM 
         Invoice_Itemized ii 
     JOIN 

@@ -41,6 +41,17 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                     >
                         Barcode Selector
                     </Button>
+
+                    <Button 
+                        color="inherit" 
+                        component={Link} 
+                        to="/mix-and-match-report" // Link to mix-and-match-report
+                        style={{ marginLeft: '15px', color: '#ffeb3b', transition: 'background-color 0.3s ease' }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = '#ffc107'} // Hover color
+                        onMouseLeave={(e) => e.currentTarget.style.color = '#ffeb3b'} // Reset color
+                    >
+                        Mix and Match Report
+                    </Button>
                 
                    
                 </div>
