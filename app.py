@@ -7,7 +7,7 @@ CORS(app)
 
 # Define the connection string
 server = 'HARSHIL\\PCAMERICA'  # Your server name
-database = 'cresql'  # Your database name
+database = 'cresqlpridom'  # Your database name
 connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
 
 # Database connection configuration
